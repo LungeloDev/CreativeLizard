@@ -1,0 +1,744 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css"
+  rel="stylesheet"
+/>
+<link rel="shortcut icon" type="image/jpg" href="{% static 'icon.jpg' %}"/>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<style>
+    html.sr .load-hidden {
+    visibility: hidden;
+}
+.portfolio {
+  height: 600px;
+  margin: 0;
+  display: grid;
+  grid-template-rows: 500px 100px;
+  grid-template-columns: 1fr 30px 30px 30px 30px 30px 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+main#carousel {
+  grid-row: 1 / 2;
+  grid-column: 1 / 8;
+  width: 100vw;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 600px;
+  --items: 5;
+  --middle: 3;
+  --position: 1;
+}
+
+img.item {
+  position: absolute;
+  width: 300px;
+  height: 400px;
+  background-color: coral;
+  --r: calc(var(--position) - var(--offset));
+  --abs: max(calc(var(--r) * -1), var(--r));
+  transition: all 0.25s linear;
+  transform: rotateY(calc(-10deg * var(--r)))
+    translateX(calc(-300px * var(--r)));
+  z-index: calc((var(--position) - var(--abs)));
+}
+
+img.item:nth-of-type(1) {
+  --offset: 1;
+
+}
+img.item:nth-of-type(2) {
+  --offset: 2;
+
+}
+img.item:nth-of-type(3) {
+  --offset: 3;
+
+}
+img.item:nth-of-type(4) {
+  --offset: 4;
+  background-color: #ffd670;
+}
+img.item:nth-of-type(5) {
+  --offset: 5;
+  background-color: #e9ff70;
+}
+
+input:nth-of-type(1) {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+input:nth-of-type(1):checked ~ main#carousel {
+  --position: 1;
+}
+
+input:nth-of-type(2) {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
+}
+input:nth-of-type(2):checked ~ main#carousel {
+  --position: 2;
+}
+
+input:nth-of-type(3) {
+  grid-column: 4 /5;
+  grid-row: 2 / 3;
+}
+input:nth-of-type(3):checked ~ main#carousel {
+  --position: 3;
+}
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: blue; /* Add a dark-grey background on hover */
+  color: white;
+}
+
+input:nth-of-type(4) {
+  grid-column: 5 / 6;
+  grid-row: 2 / 3;
+}
+input:nth-of-type(4):checked ~ main#carousel {
+  --position: 4;
+}
+
+input:nth-of-type(5) {
+  grid-column: 6 / 7;
+  grid-row: 2 / 3;
+}
+input:nth-of-type(5):checked ~ main#carousel {
+  --position: 5;
+}
+
+</style>
+</head>
+<body class="bg-light">
+    <header>
+            <!-- Intro settings -->
+            <style>
+                /* Default height for small devices */
+                 /* Carousel styling */
+                  #introCarousel,
+                  .carousel-inner,
+                  .carousel-item,
+                  .carousel-item.active {
+                    height: 50vh;
+                  }
+
+                  .carousel-item:nth-child(1) {
+                    background-image: url('{% static "mk.jpg" %}');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center center;
+                  }
+                  .carousel-item:nth-child(2) {
+                    background-image: url('{% static "gr.jpg" %}');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center center;
+                  }
+                  .carousel-item:nth-child(3) {
+                    background-image: url('{% static "sf.jpg" %}');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center center;
+                  }
+                    .carousel-item:nth-child(4) {
+                    background-image: url('{% static "bs.jpg" %}');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center center;
+                  }
+                  .carousel-item:nth-child(5) {
+                    background-image: url('{% static "ds.jpg" %}');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center center;
+                  }
+                  /* Height for devices larger than 576px */
+                  @media (min-width: 992px) {
+                    #introCarousel,
+                    .carousel-inner,
+                    .carousel-item,
+                    .carousel-item.active {
+                      height: 70vh;
+                    }
+                  }
+                .logo {
+                  background-image: url('{% static "lizard.jpg" %}');
+                  height: 65vh;
+                }
+                .phrase {
+                    position: relative;
+                    animation: mymove 5s;
+                    animation-timing-function: ease;
+
+                }
+                @keyframes mymove {
+                  from {left: -200px;}
+                  to {left: 0px;}
+                }
+              </style>
+              <!-- Navbar -->
+              <nav class="navbar navbar-expand-lg text-center navbar-light bg-light" id="navbar_top">
+                <div class="container-fluid">
+                    <img
+                        src="{% static 'icon.jpg' %}"
+                        class="rounded-circle"
+                        alt=""
+                        height = "50px"
+                        width = "50px"
+                      /><strong class="display-6">CreativeLizard</strong>
+
+                  <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarExample01"
+                    aria-controls="navbarExample01"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                  >
+                    <i class="fas fa-bars"></i>
+                  </button>
+                  <div class="collapse navigation navbar-collapse" id="navbarExample01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item active">
+                        <a class="nav-link" aria-current="page" href="#About">About Us</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#Services">Services</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#team">Our Team</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Portfolio</a>
+                      </li>
+                      </ul>
+                  </div>
+                </div>
+              </nav>
+              <!-- Navbar -->
+
+        <!-- Carousel wrapper -->
+        <div id="introCarousel" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-mdb-target="#introCarousel" data-mdb-slide-to="0" class="active"></li>
+            <li data-mdb-target="#introCarousel" data-mdb-slide-to="1"></li>
+            <li data-mdb-target="#introCarousel" data-mdb-slide-to="2"></li>
+            <li data-mdb-target="#introCarousel" data-mdb-slide-to="3"></li>
+            <li data-mdb-target="#introCarousel" data-mdb-slide-to="4"></li>
+          </ol>
+
+          <!-- Inner -->
+          <div class="carousel-inner">
+            <!-- Single item -->
+            <div class="carousel-item active">
+              <div class="mask" style="background-color: rgba(0, 0, 0, 0.3);">
+                <div class="d-flex justify-content-center align-items-center h-100 container">
+                  <div class="text-white text-center container">
+                    <h2>Innovations Explored</h2>
+                    <small class="container">We are designers, strategists, and technologists who are passionate about marketing, business innovation, and building great
+                    software, graphic designs, websites, mobile applications and online products.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Single item -->
+            <div class="carousel-item">
+              <div class="mask" style="background-color: rgba(0, 0, 0, 0.3);">
+                <div class="d-flex justify-content-center align-items-center container h-100">
+                  <div class="text-white text-center container">
+                    <h2>Graphic Design</h2>
+                    <small class="container">
+                        Our designs are sure to resonate with your target market - reaching your client's full potential. We deliver corporate designs with a flair and your
+                        vision in mind.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Single item -->
+            <div class="carousel-item">
+              <div class="mask" style="background-color: rgba(0, 0, 0, 0.3);">
+                <div class="d-flex justify-content-center align-items-center container h-100">
+                  <div class="text-white text-center container">
+                    <h2>Software Development</h2>
+                    <small class="container">Need an app to increase sales, improve efficiency, improve productivity, increase workforce flexibility, or be a market
+                    disrupt? You have come to the right place. Our team consists of developers who are internationally recognized in software development.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Single item -->
+            <div class="carousel-item">
+              <div class="mask" style="background-color: rgba(0, 0, 0, 0.3);">
+                <div class="d-flex justify-content-center align-items-center container h-100">
+                  <div class="text-white text-center container">
+                    <h2>Marketing</h2>
+                    <small class="container">
+                        We have a prowess for vision, organization, and competitive advantage. Our marketing strategist is committed to delivering marketing excellence.
+                        From concept to completion, our marketing strategist and accounts manager guids our creative and strategies.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Single item -->
+            <div class="carousel-item">
+              <div
+                class="mask"
+                style="background-color: rgba(0, 0, 0, 0.3);"
+              >
+                <div class="d-flex justify-content-center container align-items-center h-100">
+                  <div class="text-white container text-center">
+                    <h2>Data Science</h2>
+                    <small class="container">
+                        We are the CSIR 2021 Data Science hackathon winners. we can analyse & assess any data or information from any type of data set or data source
+                        using our scripts to extract insights within a shorter time frame. As Data Mining specialists, we use powerful algorythms to sift through volumes
+                        of data all the resulting reports and data sets.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Inner -->
+
+
+        </div>
+        <!-- Carousel wrapper -->
+    </header><br>
+    <section class="">
+        <div class="card container">
+          <hr>
+          <div class="row">
+          <div class="col-md-12">
+            <div class="card-body">
+                <h3 class="text-center phrase text-primary">"GREAT IDEAS HAVE THE POWER TO PROVOKE, INSPIRE AND ENERGIZE."</h3>
+          </div>
+          </div>
+          </div>
+  <section class="">
+    <div class="container text-center text-md-start mt-2">
+      <!-- Grid row -->
+      <div class="text-center">
+          <h6 class="text-uppercase fw-bold mb-4 text-primary">
+            <i class="fas fa-gem me-3" id="About"></i>About Us
+          </h6>
+          </div>
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+            <small>CreativeLizard (PTY) LTD is a full-service app/ software developer and digital creative agency based in
+            South Africa. Our mission is to empower small businesses to survive the digital presence by providing the help and tools they need to grow
+            their businesses online at affordable prices.</small>
+        </div>
+        <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
+            <small>
+                We are a team of master strategists, design prodigies, account gurus, quick-witted storytellers, obsessive-compulsive producers and tech wizards
+                all working and playing in one creative space.
+            </small>
+        </div>
+        <div class="col-md-4 col-lg-4 col-xl-3 mx-auto mb-4">
+            <small>
+                We know true collaboration creates a strong bond and brand. We thrive on open communication and believe clients deserve great creativity and great strategy.
+            </small>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+    <div class="text-center">
+          <h6 class="text-uppercase fw-bold mb-4 text-primary">
+            <i class="fas fa-gem me-3" id="Services"></i>Services
+          </h6>
+          </div>
+    <div class="row row-cols-md-3 row-cols-1 g-4">
+
+                  <!--Grid column-->
+                   <!--Grid column-->
+                   <div class="col-lg-3 col-md-3 mb-3 h-100 anim">
+
+                    <!-- Card -->
+                    <div class="card border border-primary" style="background-color: #253140; color: #ffd93b">
+
+                      <div class="card-header py-3" style="background-color: #253140; color: #ffd93b">
+                        <p class="text-uppercase small text-center mb-2 border-primary"><strong>Software Development Services</strong></p>
+                      </div>
+
+                      <div class="card-body text-center" >
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Web Design</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Web Hosting</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Mobile Apps</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Domain Names</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">E-commerce Online Stores</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Business Emails</li>
+                          <br>
+                        </ul>
+                      </div>
+                    </div>
+                    </div>
+                    <!--Grid column-->
+                   <div class="col-lg-3 col-md-3 mb-3 h-100 anim">
+
+                    <!-- Card -->
+                    <div class="card border border-primary" style="background-color: #253140; color: #ffd93b">
+
+                      <div class="card-header py-3" style="background-color: #253140; color: #ffd93b">
+                        <p class="text-uppercase small text-center mb-2 border-primary"><strong>Data Science & AI Services</strong></p>
+                      </div>
+
+                      <div class="card-body text-center">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Data Analysis</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Data Visualization</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Dashboards</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Data Modelling</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Database Design</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Recommendation Systems</li>
+                          <br>
+                        </ul>
+                      </div>
+                    </div>
+                    </div>
+                      <div class="col-lg-3 col-md-3 mb-3 h-100 anim">
+
+                    <!-- Card -->
+                    <div class="card border border-primary" style="background-color: #253140; color: #ffd93b">
+
+                      <div class="card-header py-3" style="background-color: #253140; color: #ffd93b">
+                        <p class="text-uppercase small text-center mb-2 border-primary"><strong>Marketing Services</strong></p>
+                      </div>
+
+                      <div class="card-body text-center">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Social Media Content</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">SEO</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Square Posters</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Social Media Cover</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Banner Design</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Flyers</li>
+                          <br><br>
+                        </ul>
+                      </div>
+                    </div>
+                    </div>
+                      <div class="col-lg-3 col-md-3 mb-3 anim">
+                      <!-- Card -->
+                    <div class="card border border-primary" style="background-color: #253140; color: #ffd93b">
+
+
+                      <div class="card-header py-3" style="background-color: #253140; color: #ffd93b">
+                        <p class="text-uppercase small text-center mb-2 border-primary"><strong>Graphic Design Services</strong></p>
+                      </div>
+
+                      <div class="card-body text-center">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Logo Design</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Invoice Sheet</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Cards</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">CV Revamp</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Letterhead</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Invitation</li>
+                          <br><br>
+                        </ul>
+                      </div>
+
+                      </div>
+                    </div>
+
+        </div>
+        <div class="text-center" id="team">
+        <h6 class="text-uppercase fw-bold mb-4 text-primary">
+            <i class="fas fa-gem me-3"></i>Meet Our Team
+          </h6>
+          </div>
+          <div class="row row-cols-md-3 row-cols-1 g-4">
+              <div class="col-lg-4 col-md-4 mb-4 anim">
+                  <div class="card border border-info" style="background-color: #253140; color: #ffd93b">
+                    <div class="card-image">
+                  <img
+                    src="{% static 'snaye.jpg' %}"
+                    class="card-img-top rounded"
+                    alt=""
+                    height = "250px"
+                  />
+                </div>
+                <div class="card-body" style="background-color: #253140; color: #a1dcff">
+                  <div class="card-header  text-warning">
+                  <h5>Snaye Sotashe</h5>
+                  <h6>Co-Founder, Chief Executive Officer (CEO)</h6>
+                  </div>
+                  <small class="card-text text-center">
+                    Snaye Sotashe is a Full-stack Developer, a multi-times hackathon winner, 2020 Mern stack web
+                    development international top 10 hackathon winner. He was selected by a panel of judges and voted by the public as one of the Top 15 Young Geeks in
+                    South Africa for the year 2021. He was the leader of the Unizulu team that recently won the CSIR Data Science Hackathon. He also represented the
+                    University of Zululand's Computer Science department at the 2021 IEEE/ACM 43rd International Conference on Software Engineering (ICSE)
+                    held in Madrid, Spain.
+
+                  </small>
+                  <br>
+                </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-md-4 mb-4 anim">
+                  <div class="card border border-info" style="background-color: #253140; color: #ffd93b">
+                    <div class="card-image">
+                  <img
+                    src="{% static 'lungelo.JPG' %}"
+                    class="card-img-top rounded"
+                    alt=""
+                    height = "250px"
+                  />
+                </div>
+                <div class="card-body" style="background-color: #253140; color: #a1dcff">
+                  <div class="card-header text-warning ">
+                  <h5>Lungelo Mpanza</h5>
+                  <h6>Founder, Chief Technology Officer (CTO)</h6>
+                  </div>
+                  <small class="card-text text-center">
+                    Lungelo Mpanza is an Information Systems Graduate
+                    with an interest in Data Science, FINTECH, Software
+                    Development and Machine Learning. He was part of the team of 1/4 Data Scientists who
+                    won the CSIR Data Science Hackathon. He has several Software Development Projects where he worked as a freelancer.
+                    He is passionate about extracting insights from raw data to help in day-to-day decision making in the finance sector (FINTECH).
+                    <br>
+                  </small>
+                  <br>
+                </div>
+              </div>
+              </div>
+              <div class="col-lg-4 col-md-4 mb-4 anim">
+                  <div class="card border border-info" style="background-color: #253140; color: #ffd93b">
+                    <div class="card-image">
+                  <img
+                    src="{% static 'oluhle.jpg' %}"
+                    class="card-img-top rounded"
+                    alt=""
+                    height="250px"
+                  />
+                </div>
+                <div class="card-body" style="background-color: #253140; color: #a1dcff">
+                  <div class="card-header text-warning">
+                  <h5>Oluhle Hintsa</h5>
+                  <h6>Co-Founder, Marketing Strategist & Account Manager</h6>
+                  </div>
+                  <small class="card-text text-center">
+                    Oluhle Hintsa is a Master's candidate in Criminology and Forensic Studies at the University of Kwazulu-Natal. She is a salesperson and very
+                    passionate about Network Marketing and Promotion services. She is partnered with a Bitcoin mining company located in Kentucky, US and working
+                    as an independent network marketer. She is also marketing for a local farming company situated in the Eastern Cape, South Africa. In the first 6 months of 2021,
+                    She has marketed her businesses and made sales worth over R350 000.
+                  </small>
+                  <br>
+                </div>
+              </div>
+              </div>
+              <div class="col-lg-4 col-md-4 mb-4 anim">
+                  <div class="card border border-info" style="background-color: #253140; color: #ffd93b">
+                    <div class="card-image">
+                  <img
+                    src="{% static 'fork.jpg' %}"
+                    class="card-img-top rounded"
+                    height = "250px"
+                  />
+                </div>
+                <div class="card-body" style="background-color: #253140; color: #a1dcff">
+                  <div class="card-header text-warning">
+                  <h5>Mxolisi Khumalo</h5>
+                  <h6>Co-Founder, Managing Director & UX/UI Designer</h6>
+                  </div>
+                  <small class="card-text text-center">
+                    Mxolisi holds a BSc (Computer Science and Physics) double major degree. He came in 3rd place in the CSIR DIRISA hackathon as 1/4 of the team
+                    who represented the University Of Zululand in the competition. His skills include UX/UI Design, Graphic Design, Data Analysis, Data Visualization,
+                    Machine Learning and Web Development. Currently, he is advancing his studies as a BSc Honours in Physics candidate.
+                  </small>
+                  <br>
+                </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-md-4 mb-4 anim">
+                  <div class="card border border-info" style="background-color: #253140; color: #ffd93b">
+                    <div class="card-image">
+                  <img
+                    src="{% static 'faku.jpg' %}"
+                    class="card-img-top rounded"
+                    alt=""
+                    height = "250px"
+                  />
+                </div>
+                <div class="card-body" style="background-color: #253140; color: #a1dcff">
+                  <div class="card-header text-warning">
+                  <h5>Ngcali Faku</h5>
+                  <h6>Co-Founder, Communication Manager & Copywriter</h6>
+                  </div>
+                  <small class="card-text text-center">
+                    Ngcali Faku is a Financial Information Systems Graduate. She is a dedicated,
+                    hardworking, passionate, and meticulous individual that always takes pride in what she wants to pursue. Her top skills include Financial Accounting and reporting,
+                    Financial Management, Cost Accounting & GAAP principles. She has 5 years of experience in communicating with Woolworths customers and executives.
+                  </small>
+                  <br>
+                </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-md-4 mb-4 anim">
+                      <!-- Card -->
+                    <div class="card border border-primary" style="background-color: #253140; color: #ffd93b">
+
+
+                      <div class="card-header py-3" style="background-color: #253140; color: #ffd93b">
+                        <p class="text-uppercase small text-center mb-2 border-primary"><strong>Technologies</strong></p>
+                      </div>
+
+                      <div class="card-body text-center">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Adobe XD</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Adobe Illustrator</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Canva</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Django</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Python</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">JavaScipt</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">ReactJS</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">NodeJS</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">MERN Stack</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">React Native</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Flutter</li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b">Power BI</li>
+                        </ul>
+                      </div>
+
+                      </div>
+                    </div>
+          </div>
+            <div class="text-center" id="portfolio">
+                <h6 class="text-uppercase fw-bold mb-4 text-primary">
+                    <i class="fas fa-gem me-3"></i>Some Of Our Work
+                </h6>
+          </div>
+          <div class="portfolio">
+          <input type="radio" name="position" checked />
+          <input type="radio" name="position" />
+          <input type="radio" name="position" />
+          <input type="radio" name="position" />
+          <input type="radio" name="position" />
+          <main id="carousel">
+            <img class="item" src="{% static 'Mbuyiselo Vilakazi.gif'  %}" alt=""/>
+            <img class="item" src="{% static 'BHM Attorneys.png'  %}" alt="" />
+            <img class="item" src="{% static 'mylogo.jpg'  %}" alt="" />
+            <img class="item" src="{% static 'dashboard.PNG'  %}" alt="" />
+            <img class="item" src="{% static 'logo.jpg'  %}" alt="" />
+            <main>
+        </div>
+        <div class="card border border-primary anim" style="background-color: #253140; color: #ffd93b">
+
+                      <div class="card-body text-center">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b"</li><a target="_blank" href="https://www.mbuyiselovilakazi.com/">www.mbuyiselovilakazi.com</a></li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b"><a target="_blank" href="https://www.ngobeseandassociates.site/">www.ngobeseandassociates.site</a></li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b"><a target="_blank" href="https://eager-euclid-ac1721.netlify.app/">Resume Builder </a></li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b"><a target="_blank" href="https://snayes.netlify.app/">Snaye's Portfolio</a></li>
+                          <li class="list-group-item border-primary" style="background-color: #253140; color: #ffd93b"><a target="_blank" href="https://aubrey-khumalo.github.io/portfolio//">Aubrey Khumalo's Portfolio</a></li>
+                        </ul>
+                      </div>
+
+                      </div>
+                    </div>
+                    <br><br>
+  </section>
+  <!-- Section: Links  -->
+    </section>
+    <footer class="footer">
+        {% include "footer.html" %}
+    </footer>
+</body>
+<script>
+    var slideUp = {
+    distance: '150%',
+    origin: 'bottom',
+    opacity: null
+};
+//Get the button:
+mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+ScrollReveal().reveal('.anim', slideUp);
+document.addEventListener("DOMContentLoaded", function(){
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    document.getElementById('navbar_top').classList.add('fixed-top');
+                    // add padding top to show content behind navbar
+                    navbar_height = document.querySelector('.navbar').offsetHeight;
+                    document.body.style.paddingTop = navbar_height + 'px';
+                } else {
+                    document.getElementById('navbar_top').classList.remove('fixed-top');
+                    // remove padding top from body
+                    document.body.style.paddingTop = '0';
+                }
+            });
+        });
+</script>
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+></script>
+</html>
