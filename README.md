@@ -1,1 +1,1 @@
-# CreativeLizard
+CreativeLizard (PTY) LTD is a purpose-driven full-service app/ software developer and digital creative agency based in Durban, South Africa. We help companies solve business problems and build for the future. We are designers, strategists, and technologists who are passionate about marketing, business innovtions and building great software, graphic designs websites, mobile applications, and online products.
